@@ -1,0 +1,4 @@
+1. The two libarries mentioned below are required in the same directory for the Conversion of a static csv File to a dynamic Database.The project id should match with 
+    the command Lines Version.
+    npm install google-cloud/firestore
+    npm install csv-parse

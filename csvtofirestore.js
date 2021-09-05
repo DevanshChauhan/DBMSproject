@@ -26,3 +26,18 @@ function writeToFirestore(records) {
   batchCommits.push(batch.commit());
   return Promise.all(batchCommits);
 }
+
+async function importCsv(csvFileName) {
+  const fileContents = await readFile(csvFileName, 'utf8');
+  const records = await parse(fileContents, { columns: true });
+  try {
+    await writeToFirestore(records);
+  }
+  catch (e) {
+    console.error(e);
+    process.exit(1);
+  }
+  console.log(`Wrote ${records.length} records`);
+}
+
+importCsv(process.argv[2]).catch(e => console.error(e));
